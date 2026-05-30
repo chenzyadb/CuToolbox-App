@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+                     tools:ignore="ScopedStorage"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+                     tools:ignore="ScopedStorage"/>
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission"/>
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="CuToolbox"
+        android:theme="@style/Theme.CuToolbox"
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="34">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CuToolbox">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".DynamicModeListEditorActivity"
+            android:exported="false"
+            android:label="调度动态模式编辑器"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".LogReaderActivity"
+            android:exported="false"
+            android:label="调度LOG查看"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:label="关于"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".AdditionalFunctionActivity"
+            android:exported="false"
+            android:label="附加功能"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false"
+            android:label="设置"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".HelpDocReaderActivity"
+            android:exported="false"
+            android:label="帮助文档"
+            android:theme="@style/Theme.CuToolbox"/>
+
+        <activity
+            android:name=".SchedulerModeQuickSwitchActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="调度模式快捷切换悬浮窗"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind"
+            android:taskAffinity="xyz.chenzyadb.cu_toolbox.SchedulerModeQuickSwitchActivity"
+            android:theme="@style/Theme.FloatActivity"/>
+
+        <service
+            android:name=".BackgroundAccessibilityService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/configurate"/>
+        </service>
+
+        <service
+            android:name=".FloatMonitorService"
+            android:enabled="true"
+            android:exported="false"
+            android:persistent="true"
+            android:priority="1000"/>
+
+    </application>
+
+</manifest>

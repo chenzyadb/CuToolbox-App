@@ -1,0 +1,56 @@
+package xyz.chenzyadb.cu_toolbox.ui.theme
+
+import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+
+private val darkColorScheme = darkColorScheme(
+    primary = Color(0xFFFFFFFF),
+    secondary = Color(0xFF888888),
+    tertiary = Color(0xFF404040),
+    background = Color(0xFF000000),
+    surface = Color(0xFF202020)
+)
+
+private val lightColorScheme = lightColorScheme(
+    primary = Color(0xFF000000),
+    secondary = Color(0xFF888888),
+    tertiary = Color(0xFFE0E0E0),
+    background = Color(0xFFF8F8F8),
+    surface = Color(0xFFFFFFFF)
+)
+
+@Composable
+fun CuToolboxTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.background.toArgb()
+            window.navigationBarColor = colorScheme.background.toArgb()
+            window.navigationBarDividerColor = colorScheme.background.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}

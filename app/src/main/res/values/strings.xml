@@ -1,0 +1,5 @@
+<resources>
+    <string name="describe">
+        开启无障碍以启用CuToolbox后台服务\n后台服务用于实现以下功能:\n\n1.调度动态模式.\n\n2.调度模式快捷编辑悬浮窗.\n\n3.调度开机自启动.
+    </string>
+</resources>
